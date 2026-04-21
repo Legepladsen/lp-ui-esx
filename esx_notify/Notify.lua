@@ -48,6 +48,7 @@ local function Notify(notificatonType, length, message, title, position)
 
     if type(message) == "string" then
         message = message:gsub("~br~", "<br>")
+        message = message:gsub("~.~", "")
     end
 
     zxLib.Notify(message, notificatonType, length)
