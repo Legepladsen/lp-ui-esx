@@ -1,4 +1,5 @@
 local Debug = ESX.GetConfig().EnableDebug
+local zxLib = exports.zx_lib:GetZXLib()
 
 local possiblePosition = {
     ["top-right"] = true,
@@ -49,14 +50,7 @@ local function Notify(notificatonType, length, message, title, position)
         message = message:gsub("~br~", "<br>")
     end
 
-    SendNuiMessage(json.encode({
-        type = notificatonType or "info",
-        length = length or 5000,
-        message = message or "ESX-Notify",
-        title = title or "New Notification",
-        position = position,
-        notificationSoundEnabled = Config.notificationSoundEnabled or false
-    }))
+    zxLib.Notify(message, notificatonType, length)
 end
 
 exports('Notify', Notify)
