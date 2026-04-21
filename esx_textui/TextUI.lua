@@ -1,11 +1,17 @@
 Debug = ESX.GetConfig().EnableDebug
 local zxLib = exports.zx_lib:GetZXLib()
 local isShowing = false
+
+
+
 ---@param message string
 ---@param typ string
 local function TextUI(message, typ)
     isShowing = true
-    zxLib.TextUI({text = message})
+    message = message:gsub('~.~', '')
+    local key = message:match('%[(.-)%]') or 'E'
+    message:gsub('%[.-%]', '')
+    zxLib.TextUI({text = message, keybind = key})
 end
 
 local function HideUI()
