@@ -1,14 +1,11 @@
 Debug = ESX.GetConfig().EnableDebug
+local zxLib = exports.zx_lib:GetZXLib()
 local isShowing = false
 ---@param message string
 ---@param typ string
 local function TextUI(message, typ)
     isShowing = true
-    SendNUIMessage({
-        action = "show",
-        message = message and message or "ESX-TextUI",
-        type = type(typ) == "string" and typ or "info",
-    })
+    zxLib.TextUI({text = message})
 end
 
 local function HideUI()
@@ -16,9 +13,7 @@ local function HideUI()
         return
     end
     isShowing = false
-    SendNUIMessage({
-        action = "hide",
-    })
+    zxLib.HideTextUI()
 end
 
 exports("TextUI", TextUI)
